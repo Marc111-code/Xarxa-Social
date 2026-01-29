@@ -46,3 +46,34 @@ resposta = input("Vols crear un nou usuari (s/n)")
 while resposta=="s": 
     print(newUser({}))
     resposta = input("Vols crear un nou usuari (s/n)")
+
+def searchUser(b):
+    '''
+    cat
+    '''
+    dni = 0
+    while dni not in list(b.keys()):
+        print("=====================================")
+        print("Searching user in Social Network")
+        print("=====================================")
+        dni = int(input("Posa el dni: "))
+        print(list(b.keys()))
+        if dni in list(b.keys()):
+            print("Usuari Trobat! Buscant informació")
+            print("Nom i Cognom: " + str((b[dni])[0]) + str((b[dni])[1]))
+            print("Ciutat: " + str((b[dni])[2]))
+            print("Centre: " +  str((b[dni])[3]))
+            print("Hobbies: " + str((b[dni])[4]))
+            print("Email: " + str((b[dni])[5]))
+        else:
+            print("No s'ha trobat cap usuari")
+
+
+def listUsers(b):
+    print("=====================================")
+    print("List users Social Network")
+    print("Nom i Cognom: " + str((b[dni])[0]) + str((b[dni])[1]))
+    print("Ciutat: " + str((b[dni])[2]))
+    print("Centre: " +  str((b[dni])[3]))
+    print("Hobbies: " + str((b[dni])[4]))
+    print("Email: " + str((b[dni])[5]))
