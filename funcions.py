@@ -85,3 +85,18 @@ def listUsers(b):
             print("Email: " + i[5])
             print("=====================================")
         print(str(len(b)) + " usuaris trobats")
+
+
+def acceptUser(b):
+    print("=====================================")
+    print("Fer amics")
+    print("=====================================")
+    dni1 = input("Enter dni1: ")
+    if int(dni1) in b.keys():
+        dni2 = input("Enter dni2: ")
+        if int(dni2) in b.keys():
+            print("El dni1 i el dni2 son usuaris de la xarxa")
+            print("Amics de " + dni1 + ":")
+            print(str(b[int(dni2)]))
+            #print("Amics de " + str(dni2) + ":" + b[dni1])
+acceptUser({4:["marc"],2:["marc2"],6:["marc3"]})
