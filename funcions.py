@@ -71,9 +71,17 @@ def searchUser(b):
 
 def listUsers(b):
     print("=====================================")
-    print("List users Social Network")
-    print("Nom i Cognom: " + str((b[dni])[0]) + str((b[dni])[1]))
-    print("Ciutat: " + str((b[dni])[2]))
-    print("Centre: " +  str((b[dni])[3]))
-    print("Hobbies: " + str((b[dni])[4]))
-    print("Email: " + str((b[dni])[5]))
+    print("Llista usuaris")
+    print("=====================================")
+
+    if len(b) == 0:
+        print("O usuaris trobats")
+    else:
+        for i in b.values():
+            print("Nom i Cognom: " + i[0] +" "+ i[1])
+            print("Ciutat: " + i[2])
+            print("Centre: " + i[3])
+            print("Hobbies: " + i[4])
+            print("Email: " + i[5])
+            print("=====================================")
+        print(str(len(b)) + " usuaris trobats")
