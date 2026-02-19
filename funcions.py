@@ -88,15 +88,35 @@ def listUsers(b):
 
 
 def acceptUser(b):
+    amics1 = []
+    m = 1        
     print("=====================================")
     print("Fer amics")
     print("=====================================")
-    dni1 = input("Enter dni1: ")
-    if int(dni1) in b.keys():
-        dni2 = input("Enter dni2: ")
-        if int(dni2) in b.keys():
-            print("El dni1 i el dni2 son usuaris de la xarxa")
-            print("Amics de " + dni1 + ":")
-            print(str(b[int(dni2)]))
-            #print("Amics de " + str(dni2) + ":" + b[dni1])
+    while m == 1:
+        dni1 = int(input("Enter dni1: "))
+        if int(dni1) in b.keys():
+            dni2 = int(input("Enter dni2: "))
+            if int(dni2) in b.keys():
+                print("El dni1 i el dni2 son usuaris de la xarxa")
+                print("Amics de " + str(dni1) + ":")
+                b[dni1] = b[dni1] + [[dni2]]
+                b[dni2] = b[dni2] + [[dni1]]
+                print(b)
+                print("=====================================")
+                print("Fer amics")
+                print("=====================================")
+                resposta = input("Vols fer més amics? (s / n)")
+                if resposta == "s" or resposta == "S":
+                    m = 1
+                else:
+                    m = 0
+            
+        else:
+            print("El dni:" + str(dni1) + " no és usuari de la xarxa")
+            resposta = input("Vols fer més amics? (s / n)")
+            if resposta == "s" or resposta == "S":
+                m = 1
+            else:
+                m = 0 
 acceptUser({4:["marc"],2:["marc2"],6:["marc3"]})
