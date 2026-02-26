@@ -52,23 +52,32 @@ def searchUser(b):
     cat
     '''
     dni = 0
-    while dni not in list(b.keys()):
+    buscarAmics = True
+    while buscarAmics == True:
         print("=====================================")
         print("Searching user in Social Network")
         print("=====================================")
         dni = int(input("Posa el dni: "))
-        print(list(b.keys()))
         if dni in list(b.keys()):
             print("Usuari Trobat! Buscant informació")
-            print("Nom i Cognom: " + str((b[dni])[0]) + str((b[dni])[1]))
+            print("Nom i Cognom: " + str((b[dni])[0]) + " " + str((b[dni])[1]))
             print("Ciutat: " + str((b[dni])[2]))
             print("Centre: " +  str((b[dni])[3]))
             print("Hobbies: " + str((b[dni])[4]))
             print("Email: " + str((b[dni])[5]))
+            print("Amics:" + str((b[dni])[6]))
+            
         else:
-            print("No s'ha trobat cap usuari")
-
-
+            print("No s'ha trobat cap usuari") 
+        buscarAmics = input("Vols buscar els amics de més persones?(s/n)")
+        if buscarAmics == "S" or buscarAmics == "s":
+            buscarAmics = True
+        else:
+            buscarAmics = False
+'''
+b = acceptUser({4:["marc","Soler","Codelearn", "Barcelona", "Basquet", "email"],2:["marc2","Soler","Codelearn", "Barcelona", "Basquet", "email"],6:["marc3","Soler","Codelearn", "Barcelona", "Basquet", "email"]})
+searchUser(b)
+'''
 def listUsers(b):
     print("=====================================")
     print("Llista usuaris")
@@ -83,9 +92,13 @@ def listUsers(b):
             print("Centre: " + i[3])
             print("Hobbies: " + i[4])
             print("Email: " + i[5])
+            if len(i) > 6:
+                print("Amics:" + str(i[6]))            
             print("=====================================")
         print(str(len(b)) + " usuaris trobats")
 
+b = acceptUser({4:["marc","Soler","Codelearn", "Barcelona", "Basquet", "email"],2:["marc2","Soler","Codelearn", "Barcelona", "Basquet", "email"],6:["marc3","Soler","Codelearn", "Barcelona", "Basquet", "email"]})
+listUsers(b)
 
 def acceptUser(b):
     amics1 = []
@@ -102,7 +115,7 @@ def acceptUser(b):
                 print("Amics de " + str(dni1) + ":")
                 b[dni1] = b[dni1] + [[dni2]]
                 b[dni2] = b[dni2] + [[dni1]]
-                print(b)
+                print(b[dni1])
                 print("=====================================")
                 print("Fer amics")
                 print("=====================================")
@@ -119,4 +132,3 @@ def acceptUser(b):
                 m = 1
             else:
                 m = 0 
-acceptUser({4:["marc"],2:["marc2"],6:["marc3"]})
