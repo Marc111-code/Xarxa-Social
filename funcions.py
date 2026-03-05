@@ -97,9 +97,8 @@ def listUsers(b):
             print("=====================================")
         print(str(len(b)) + " usuaris trobats")
 
-b = acceptUser({4:["marc","Soler","Codelearn", "Barcelona", "Basquet", "email"],2:["marc2","Soler","Codelearn", "Barcelona", "Basquet", "email"],6:["marc3","Soler","Codelearn", "Barcelona", "Basquet", "email"]})
+b = acceptUser( )
 listUsers(b)
-
 def acceptUser(b):
     amics1 = []
     m = 1        
@@ -132,3 +131,28 @@ def acceptUser(b):
                 m = 1
             else:
                 m = 0 
+
+
+
+def saveFile(b):
+    resposta = input("Enter Option: ")
+    if resposta == "exit":
+        resposta1 = input("Are you sure you want to logout? ( y / n )")
+        if resposta1 == "y" or resposta1 =="Y":
+            print("Thanks for using Social Network")
+            with open("data.csv", "a") as f:
+                f.write("Nom i Cognom, Ciutat, Centre, Hobbies, Email, Contrasenya, Amics")
+                f.write("\n")
+                for i in b.values():
+
+                    f.write(i[0] +" "+ i[1] + ", ")
+                    f.write(i[2] + ", ")
+                    f.write(i[3] + ", ")
+                    f.write(i[4] + ", ")
+                    f.write(i[5] + ", ")
+                    if len(i) > 6:
+                        f.write(str(i[6]) + ", ")
+                    f.write("\n")
+
+b = {4:["marc","Soler","Codelearn", "Barcelona", "Basquet", "email"],2:["marc2","Soler","Codelearn", "Barcelona", "Basquet", "email"],6:["marc3","Soler","Codelearn", "Barcelona", "Basquet", "email"]}            
+saveFile(b)
