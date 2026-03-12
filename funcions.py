@@ -13,6 +13,7 @@ def menu():
     print("exit -> Logout")
     print("=====================================")
     respostam = input("Enter option: ")
+
     return respostam
 
 def newUser(b):
@@ -42,10 +43,10 @@ def newUser(b):
         b[dni]=info
     return b
 
-resposta = input("Vols crear un nou usuari (s/n)")
-while resposta=="s": 
-    print(newUser({}))
     resposta = input("Vols crear un nou usuari (s/n)")
+    while resposta=="s": 
+        print(newUser({}))
+        resposta = input("Vols crear un nou usuari (s/n)")
 
 def searchUser(b):
     '''
@@ -97,8 +98,7 @@ def listUsers(b):
             print("=====================================")
         print(str(len(b)) + " usuaris trobats")
 
-b = acceptUser( )
-listUsers(b)
+
 def acceptUser(b):
     amics1 = []
     m = 1        
@@ -154,5 +154,19 @@ def saveFile(b):
                         f.write(str(i[6]) + ", ")
                     f.write("\n")
 
-b = {4:["marc","Soler","Codelearn", "Barcelona", "Basquet", "email"],2:["marc2","Soler","Codelearn", "Barcelona", "Basquet", "email"],6:["marc3","Soler","Codelearn", "Barcelona", "Basquet", "email"]}            
-saveFile(b)
+b = {4:["marc","Soler","Codelearn", "Barcelona", "Basquet", "email",[]],2:["marc2","Soler","Codelearn", "Barcelona", "Basquet", "email",[]],6:["marc3","Soler","Codelearn", "Barcelona", "Basquet", "email",[]]}            
+def game(b):
+    
+    resposta2 = menu()
+    if resposta2 == "new":
+        b=newUser(b)
+        print(b)
+    if resposta2 == "cat":
+        print(searchUser(b))
+    if resposta2 == "ls":
+       listUsers(b)
+    if resposta2 == "add":
+         acceptUser(b)
+
+        
+game(b)
