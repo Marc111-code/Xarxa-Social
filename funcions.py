@@ -174,6 +174,23 @@ def readFile():
     print(fit)
     return fit
 
+def searchPattern(b):
+    m = 0 
+    while m <= 0:
+        resposta = input("Busca l'usuari per un patró:")
+        for v in b.values(): 
+            for n in v:
+                if resposta in n:
+                    print("be")
+                else:
+                    print("No hi ha cap usuari que tingui aquest patró")
+        resposta = input("Vols tornar a buscar un patró?(y / n)")
+        if resposta == "y" or resposta == "Y":
+            m = 0 
+        else: 
+            m = 1
+            
+searchPattern(b)
 def game(b):
     resposta2 = menu()
     if resposta2 == "new":
