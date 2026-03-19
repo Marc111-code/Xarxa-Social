@@ -171,7 +171,8 @@ def readFile():
             if len(i) > 6:
                 fit = fit + str(i[6]) + " "  
             fit = fit + "\n"
-    print(fit)          
+    print(fit)
+    return fit
 
 def game(b):
     resposta2 = menu()
