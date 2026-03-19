@@ -155,8 +155,25 @@ def saveFile(b):
                     f.write("\n")
 
 b = {4:["marc","Soler","Codelearn", "Barcelona", "Basquet", "email",[]],2:["marc2","Soler","Codelearn", "Barcelona", "Basquet", "email",[]],6:["marc3","Soler","Codelearn", "Barcelona", "Basquet", "email",[]]}            
+def readFile():
+    '''
+    load
+    '''
+    fit = ""
+    with open("data.csv", "a") as f:
+        for i in b.values():
+            fit = fit + str(i[0]) + " "
+            fit = fit + str(i[1]) + " "
+            fit = fit + str(i[2]) + " "
+            fit = fit + str(i[3]) + " "
+            fit = fit + str(i[4]) + " "
+            fit = fit + str(i[5]) + " "
+            if len(i) > 6:
+                fit = fit + str(i[6]) + " "  
+            fit = fit + "\n"
+    print(fit)          
+
 def game(b):
-    
     resposta2 = menu()
     if resposta2 == "new":
         b=newUser(b)
@@ -164,9 +181,11 @@ def game(b):
     if resposta2 == "cat":
         print(searchUser(b))
     if resposta2 == "ls":
-       listUsers(b)
+        listUsers(b)
     if resposta2 == "add":
-         acceptUser(b)
+        acceptUser(b)
+    if resposta2 == "load":
+        readFile()
 
         
 game(b)
