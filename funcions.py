@@ -15,7 +15,7 @@ def menu():
     respostam = input("Enter option: ")
 
     return respostam
-
+    
 def newUser(b):
     '''
     mira si el dni que introdueix l'usuari ja ha sigut utlitzat,
@@ -174,22 +174,41 @@ def readFile():
     print(fit)
     return fit
 
+def dniAbonic(dni):
+    
+        print("Nom i Cognom: " + str((b[dni])[0]) + " " + str((b[dni])[1]))
+        print("Ciutat: " + str((b[dni])[2]))
+        print("Centre: " +  str((b[dni])[3]))
+        print("Hobbies: " + str((b[dni])[4]))
+        print("Email: " + str((b[dni])[5]))
+        print("Amics:" + str((b[dni])[6]))    
+        print("\n")
 def searchPattern(b):
+    '''
+    se
+    '''
+    aux = False
     m = 0 
+    llistaReslutatsPatrons = []
     while m <= 0:
         resposta = input("Busca l'usuari per un patró:")
-        for v in b.values(): 
+        for dni, v in b.items(): 
             for n in v:
-                if resposta in n:
-                    print("be")
-                else:
-                    print("No hi ha cap usuari que tingui aquest patró")
+                if resposta == n:
+                    dniAbonic(dni)
+                    aux = True
+                    llistaReslutatsPatrons.append(dni)
+        if not aux :
+            print("No hi ha cap usuari que tingui aquest patró")
+       
         resposta = input("Vols tornar a buscar un patró?(y / n)")
         if resposta == "y" or resposta == "Y":
             m = 0 
         else: 
             m = 1
             
+    return llistaReslutatsPatrons
+       
 searchPattern(b)
 def game(b):
     resposta2 = menu()
