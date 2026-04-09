@@ -210,6 +210,21 @@ def searchPattern(b):
     return llistaReslutatsPatrons
        
 searchPattern(b)
+def moveUser(b):
+    resposta = input("Posa el dni: ")
+    if int(resposta) in list(b.keys()):
+        print("Usuari Existent")
+        resposta1 = input("Posa la Contrasenya de l'usuari " + resposta+": ")
+        if resposta1 == b[int(resposta)][6]:
+            print(b)
+            print("a.Modificar Ciutat")
+            print("b.Modificar Hobbies")
+            print("c.Modificar email")
+            print("d.Exit")
+            resposta2 = input("Que Vols Modificar?")
+b = {4:["marc","Soler","Codelearn", "Barcelona", "Basquet", "email","a"],2:["marc2","Soler","Codelearn", "Barcelona", "Basquet", "email","a"],6:["marc3","Soler","Codelearn", "Barcelona", "Basquet", "email"]}            
+moveUser(b)
+
 def game(b):
     resposta2 = menu()
     if resposta2 == "new":
