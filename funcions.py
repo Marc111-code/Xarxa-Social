@@ -131,7 +131,7 @@ def acceptUser(b):
                 m = 1
             else:
                 m = 0 
-
+        return b
 
 
 def saveFile(b):
@@ -209,25 +209,58 @@ def searchPattern(b):
             
     return llistaReslutatsPatrons
        
-searchPattern(b)
 def moveUser(b):
-    resposta = input("Posa el dni: ")
-    if int(resposta) in list(b.keys()):
-        print("Usuari Existent")
-        resposta1 = input("Posa la Contrasenya de l'usuari " + resposta+": ")
-        if resposta1 == b[int(resposta)][6]:
-            print(b)
-            print("a.Modificar Ciutat")
-            print("b.Modificar Hobbies")
-            print("c.Modificar email")
-            print("d.Exit")
-            resposta2 = input("Que Vols Modificar?")
-b = {4:["marc","Soler","Codelearn", "Barcelona", "Basquet", "email","a"],2:["marc2","Soler","Codelearn", "Barcelona", "Basquet", "email","a"],6:["marc3","Soler","Codelearn", "Barcelona", "Basquet", "email"]}            
-moveUser(b)
+    k = 0
+    a = 0
+    while k == 0:
+        resposta = input("Posa el dni: ")
+        if int(resposta) in list(b.keys()):
+            k=1
+            print("Usuari Existent")
+            while a == 0:
+                resposta1 = input("Posa la Contrasenya de l'usuari " +     resposta+": ")
+                if resposta1 == b[int(resposta)][6]:
+                    a = 1
+                    reslist = b[int(resposta)]
+                    print(reslist)
+                    print("a.Modificar Ciutat")
+                    print("b.Modificar Hobbies")
+                    print("c.Modificar email")
+                    print("d.Exit")
+                    resposta2 = input("Que Vols Modificar? ")
+                    if resposta2 == "a":
+                        resposta3 = input("De Quina ciutat ets? ")
+                        reslist[2] = resposta3
+                        print("Canvis fets!")
+                        print(b[int(resposta)])
+                    if resposta2 == "b":
+                        resposta4 = input("Hobbies: ")
+                        reslist[4] = resposta4
+                        print("Canvis fets!")
+                        print(b[int(resposta)])
+                    if resposta2 == "c":
+                        resposta5 = input("Email: ")
+                        reslist[5] = resposta5
+                        print("Canvis fets!")
+                        print(b[int(resposta)])
+                    if resposta2 == "d":
+                        return b
+                    else:
+                        print("No és una opció")
+                else:
+                    print("Aquesta Contrasenya no és la correcta")
+        else:
+            print("Aquest Dni no existeix")
+        return b
+    
+    
+def game():                
+    b = {4:["marc","Soler","barcelona", "codelearn", "Basquet", "email","a"],2:["marc2","Soler","bcn", "codelearn", "Basquet", "email","a"],6:["marc3","Soler","bcn", "codelearn", "Basquet", "email"]}        
 
-def game(b):
     resposta2 = menu()
+    print(resposta2)
     if resposta2 == "new":
+        print("new")
         b=newUser(b)
         print(b)
     if resposta2 == "cat":
@@ -235,9 +268,10 @@ def game(b):
     if resposta2 == "ls":
         listUsers(b)
     if resposta2 == "add":
-        acceptUser(b)
+        b=acceptUser(b) #Fer amics
     if resposta2 == "load":
         readFile()
-
-        
-game(b)
+    if resposta2 == 'mv':
+        b=moveUser(b) #Modificar
+        print(b)
+game()
