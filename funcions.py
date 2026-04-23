@@ -9,7 +9,6 @@ def menu():
     print("se ---> Search user by pattern")
     print("mv ---> Modify user information")
     print("save -> Save users to disk")
-    print("load -> Load users from disk")
     print("exit -> Logout")
     print("=====================================")
     respostam = input("Enter option: ")
@@ -66,7 +65,8 @@ def searchUser(b):
             print("Centre: " +  str((b[dni])[3]))
             print("Hobbies: " + str((b[dni])[4]))
             print("Email: " + str((b[dni])[5]))
-            print("Amics:" + str((b[dni])[6]))
+            if len(b[dni]) > 7:
+                print("Amics:" + str((b[dni])[7]))
             
         else:
             print("No s'ha trobat cap usuari") 
@@ -93,8 +93,8 @@ def listUsers(b):
             print("Centre: " + i[3])
             print("Hobbies: " + i[4])
             print("Email: " + i[5])
-            if len(i) > 6:
-                print("Amics:" + str(i[6]))            
+            if len(i) > 7:
+                print("Amics:" + str(i[7]))            
             print("=====================================")
         print(str(len(b)) + " usuaris trobats")
 
@@ -114,7 +114,8 @@ def acceptUser(b):
                 print("Amics de " + str(dni1) + ":")
                 b[dni1] = b[dni1] + [[dni2]]
                 b[dni2] = b[dni2] + [[dni1]]
-                print(b[dni1])
+                
+                print(b[dni1][7])
                 print("=====================================")
                 print("Fer amics")
                 print("=====================================")
@@ -154,10 +155,9 @@ def saveFile(b):
                         f.write(str(i[6]) + ", ")
                     f.write("\n")
 
-b = {4:["marc","Soler","Codelearn", "Barcelona", "Basquet", "email",[]],2:["marc2","Soler","Codelearn", "Barcelona", "Basquet", "email",[]],6:["marc3","Soler","Codelearn", "Barcelona", "Basquet", "email",[]]}            
 def readFile():
     '''
-    load
+    save
     '''
     fit = ""
     with open("data.csv", "a") as f:
@@ -175,13 +175,11 @@ def readFile():
     return fit
 
 def dniAbonic(dni):
-    
-        print("Nom i Cognom: " + str((b[dni])[0]) + " " + str((b[dni])[1]))
-        print("Ciutat: " + str((b[dni])[2]))
-        print("Centre: " +  str((b[dni])[3]))
-        print("Hobbies: " + str((b[dni])[4]))
-        print("Email: " + str((b[dni])[5]))
-        print("Amics:" + str((b[dni])[6]))    
+        print("Nom i Cognom: " + dni[0] + " " + dni[1])
+        print("Ciutat: " + dni[2])
+        print("Centre: " +  dni[3])
+        print("Hobbies: " + dni[4])
+        print("Email: " + dni[5])
         print("\n")
 def searchPattern(b):
     '''
@@ -192,10 +190,10 @@ def searchPattern(b):
     llistaReslutatsPatrons = []
     while m <= 0:
         resposta = input("Busca l'usuari per un patró:")
-        for dni, v in b.items(): 
+        for dni, v in b.items():
             for n in v:
                 if resposta == n:
-                    dniAbonic(dni)
+                    dniAbonic(b[dni])
                     aux = True
                     llistaReslutatsPatrons.append(dni)
         if not aux :
@@ -255,23 +253,38 @@ def moveUser(b):
     
     
 def game():                
-    b = {4:["marc","Soler","barcelona", "codelearn", "Basquet", "email","a"],2:["marc2","Soler","bcn", "codelearn", "Basquet", "email","a"],6:["marc3","Soler","bcn", "codelearn", "Basquet", "email"]}        
-
+    b = {4:["marc","Soler","barcelona", "codelearn", "Basquet", "email","a"],2:["Agnès","Solé","Tarragona", "codelearn", "Natació", "email","b"],6:["Pol","Trepat","Mataró", "codelearn", "Basquet", "email"]}        
     resposta2 = menu()
-    print(resposta2)
+    a = 0
     if resposta2 == "new":
-        print("new")
-        b=newUser(b)
-        print(b)
+        while a == 0:
+            b=newUser(b)
+            print(b)
+            res = input("Vols crear un altre usuari? (s / n)")
+            if res == "s":
+                a = 0 
+            if res == "n":
+                a = 1
+                game()
     if resposta2 == "cat":
         print(searchUser(b))
+        game()
     if resposta2 == "ls":
         listUsers(b)
+        game()
     if resposta2 == "add":
-        b=acceptUser(b) #Fer amics
-    if resposta2 == "load":
-        readFile()
+        b=acceptUser(b)#Fer amics
+        game()
     if resposta2 == 'mv':
         b=moveUser(b) #Modificar
-        print(b)
+        game()
+    if resposta2 == "se":
+        searchPattern(b)
+        '''
+        aqui
+        '''
+    if resposta2 == "save":
+        readFile()
+    if resposta2 == "exit":
+        saveFile(b)
 game()
