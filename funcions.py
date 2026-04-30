@@ -21,8 +21,10 @@ def newUser(b):
    i si no li demana tota la informació
     '''
     dni = input("Posa el DNI: ")
-    if dni in list(b.keys()):
+    if int(dni) in list(b.keys()):
         return "Aquest usuari ja ha sigut introduit, inicia sessió."
+    if dni in "qwertyuiopasdfghjklñzxcvnm":
+        return "Posa un DNI VÀLID"
     else:        
         info=[]
         nom = input("Posa el teu Nom: ")
@@ -45,8 +47,7 @@ def newUser(b):
     resposta = input("Vols crear un nou usuari (s/n)")
     while resposta=="s": 
         print(newUser({}))
-        resposta = input("Vols crear un nou usuari (s/n)")
-
+ 
 def searchUser(b):
     '''
     cat
@@ -160,6 +161,7 @@ def readFile():
     save
     '''
     fit = ""
+    b = {4:["marc","Soler","barcelona", "codelearn", "Basquet", "email","a"],2:["Agnès","Solé","Tarragona", "codelearn", "Natació", "email","b"],6:["Pol","Trepat","Mataró", "codelearn", "Basquet", "email"]} 
     with open("data.csv", "a") as f:
         for i in b.values():
             fit = fit + str(i[0]) + " "
@@ -253,38 +255,39 @@ def moveUser(b):
     
     
 def game():                
-    b = {4:["marc","Soler","barcelona", "codelearn", "Basquet", "email","a"],2:["Agnès","Solé","Tarragona", "codelearn", "Natació", "email","b"],6:["Pol","Trepat","Mataró", "codelearn", "Basquet", "email"]}        
-    resposta2 = menu()
-    a = 0
-    if resposta2 == "new":
-        while a == 0:
-            b=newUser(b)
+    b = {4:["marc","Soler","barcelona", "codelearn", "Basquet", "email","a"],2:["Agnès","Solé","Tarragona", "codelearn", "Natació", "email","b"],6:["Pol","Trepat","Mataró", "codelearn", "Basquet", "email"]}
+    resposta2 = 0
+    while resposta2 != "exit":
+        resposta2 = menu()
+        a = 0
+        if resposta2 == "new":
+            while a == 0:
+                b=newUser(b)
+                print(b)
+                res = input("Vols crear un altre usuari? (s / n)")
+                if res == "s":
+                    a = 0 
+                if res == "n":
+                    a = 1
+                    
+        if resposta2 == "cat":
+            print(searchUser(b))
+            
+        if resposta2 == "ls":
             print(b)
-            res = input("Vols crear un altre usuari? (s / n)")
-            if res == "s":
-                a = 0 
-            if res == "n":
-                a = 1
-                game()
-    if resposta2 == "cat":
-        print(searchUser(b))
-        game()
-    if resposta2 == "ls":
-        listUsers(b)
-        game()
-    if resposta2 == "add":
-        b=acceptUser(b)#Fer amics
-        game()
-    if resposta2 == 'mv':
-        b=moveUser(b) #Modificar
-        game()
-    if resposta2 == "se":
-        searchPattern(b)
-        '''
-        aqui
-        '''
-    if resposta2 == "save":
-        readFile()
-    if resposta2 == "exit":
-        saveFile(b)
+            listUsers(b)
+            
+        if resposta2 == "add":
+            b=acceptUser(b)#Fer amics
+            
+        if resposta2 == 'mv':
+            b=moveUser(b) #Modificar
+            
+        if resposta2 == "se":
+            searchPattern(b)
+            
+        if resposta2 == "save":
+            readFile()
+            
+    saveFile(b)
 game()
